@@ -113,7 +113,19 @@ while running:
     # 천장에 닿은 무기 없애기
     weapons = [ [w[0], w[1]] for w in weapons if w[1] > 0]
 
+    # 공 위치 정의
+    for ball_idx, ball_val in enumerate(balls):
+        ball_pos_x = ball_val["pos_x"]
+        ball_pos_y = ball_val["pos_y"]
+        ball_img_idx = ball_val["img_idx"]
 
+        ball_size = ball_imges[ball_img_idx].get_rect().size
+        ball_width = ball_size[0]
+        ball_height = ball_size[1]
+
+        # 가로벽에 닿았을 때 공 위치 이동 위치 변경 (튕겨 나오는 효과)
+        if ball_pos_x < 0 or ball_pos_x > screen_width - ball_width:
+            ball_val["to_x"] = ball_val["to_x"] * -1
 
     # 4. 충돌 처리
 
